@@ -154,7 +154,7 @@ check_ip_forward() {
 # ---------------------------------
 # 版本获取
 download_version() {
-    local version_url="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
+    local version_url="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/version.txt"
     version=$(curl -sSL "$(get_url "$version_url")") || {
         echo -e "${red}获取 mihomo 远程版本失败${reset}"
         exit 1
@@ -168,7 +168,7 @@ download_mihomo() {
     local version_file="/root/mihomo/version.txt"
     local filename="mihomo-linux-${arch}-${version}.gz"
     [ "$arch" = "amd64" ] && filename="mihomo-linux-${arch}-compatible-${version}.gz"
-    local download_url="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${filename}"
+    local download_url="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/${filename}"
     wget -O "$filename" "$(get_url "$download_url")" || {
         echo -e "${red}mihomo 下载失败，请检查网络后重试${reset}"
         exit 1
