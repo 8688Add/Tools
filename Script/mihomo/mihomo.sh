@@ -354,7 +354,7 @@ install_mihomo() {
     local folders="/root/mihomo"
     local service_file="/etc/init.d/mihomo"
     local system_file="/etc/systemd/system/mihomo.service"
-    local install_url="https://raw.githubusercontent.com/0118Add/Tools/refs/heads/main/Script/mihomo/install.sh"
+    local install_url="https://raw.githubusercontent.com/8688Add/Tools/refs/heads/main/Script/mihomo/install.sh"
     if [ -d "$folders" ]; then
         echo -e "${yellow}检测到 mihomo 已经安装, 并运行在 ${folders} 目录下${reset}"
         echo -e "${red}警告: 卸载后将删除全部内容！！！${reset}"
@@ -408,7 +408,7 @@ get_schema() {
 # 版本获取及更新
 download_alpha_version() {
     check_network
-    local version_url="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/version.txt"
+    local version_url="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/version.txt"
     version=$(curl -sSL "$(get_url "$version_url")") || {
         echo -e "${red}获取 mihomo 远程版本失败${reset}"
         exit 1
@@ -416,7 +416,7 @@ download_alpha_version() {
 }
 
 download_latest_version() {
-    local version_url="https://api.github.com/repos/MetaCubeX/mihomo/releases/latest"
+    local version_url="https://api.github.com/repos/vernesong/mihomo/releases/latest"
     version=$(curl -sSL "$version_url" | jq -r '.tag_name' | sed 's/v//') || {
         echo -e "${red}获取 mihomo 远程版本失败${reset}"
         exit 1
@@ -430,7 +430,7 @@ download_alpha_mihomo() {
     local version_file="/root/mihomo/version.txt"
     local filename="mihomo-linux-${arch}-${version}.gz"
     [ "$arch" = "amd64" ] && filename="mihomo-linux-${arch}-compatible-${version}.gz"
-    local download_url="https://github.com/MetaCubeX/mihomo/releases/download/Prerelease-Alpha/${filename}"
+    local download_url="https://github.com/vernesong/mihomo/releases/download/Prerelease-Alpha/${filename}"
     wget -q -O "$filename" "$(get_url "$download_url")" || {
         echo -e "${red}mihomo 下载失败, 请检查网络后重试${reset}"
         exit 1
@@ -455,7 +455,7 @@ download_latest_mihomo() {
     local version_file="/root/mihomo/version.txt"
     local filename="mihomo-linux-${arch}-v${version}.gz"
     [ "$arch" = "amd64" ] && filename="mihomo-linux-${arch}-compatible-v${version}.gz"
-    local download_url="https://github.com/MetaCubeX/mihomo/releases/download/v${version}/${filename}"
+    local download_url="https://github.com/vernesong/mihomo/releases/download/v${version}/${filename}"
     wget -q -O "$filename" "$(get_url "$download_url")" || {
         echo -e "${red}mihomo 下载失败, 可能是网络问题, 建议重新运行本脚本重试下载${reset}"
         exit 1
@@ -538,7 +538,7 @@ update_shell() {
     check_network
     local shell_file="/usr/bin/mihomo"
     local tmp_file="$(mktemp /tmp/mihomo.XXXXXX)"
-    local sh_ver_url="https://raw.githubusercontent.com/0118Add/Tools/refs/heads/main/Script/mihomo/mihomo.sh"
+    local sh_ver_url="https://raw.githubusercontent.com/8688Add/Tools/refs/heads/main/Script/mihomo/mihomo.sh"
     trap 'rm -f "$tmp_file"' RETURN
     echo -e "${green}开始检查脚本是否有更新${reset}"
     local sh_new_ver=$(curl -sSL "$(get_url "$sh_ver_url")" | grep 'sh_ver="' | awk -F "=" '{print $NF}' | sed 's/\"//g' | head -1) || {
@@ -960,7 +960,7 @@ mode_mihomo() {
 reset_config() {
   local root_folder="/root/mihomo"
   local config_file="$root_folder/config.yaml"
-  local remote_config_url="https://raw.githubusercontent.com/0118Add/Tools/refs/heads/main/Config/mihomo.yaml"
+  local remote_config_url="https://raw.githubusercontent.com/8688Add/Tools/refs/heads/main/Config/mihomo.yaml"
   mkdir -p "$root_folder"
 
   local iface=$(ip route get 1 | awk '{print $5; exit}')
